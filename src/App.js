@@ -1,64 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-/*
-Header
-    - LOGO
-    - Nav Items
-Body
-    - Search
-    - RestaurantContainer
-      - RestaurantCard
-         - Name of Restraunt, Star Rating, Cuisine, Delievery Time 
-Footer
-    - Copyright
-    - Links
-    - Address
-    - Contact
-*/
-const Header = () => {
-  return (
-    <div className="header">
-      <div className="logo-container">
-        <img
-          className="logo"
-          src="https://media.istockphoto.com/id/1435983029/vector/food-delivery-logo-images.jpg?s=612x612&w=0&k=20&c=HXPxcjOxUiW4pMW1u9E0k2dJYQOU37a_0qZAy3so8fY="
-          alt="Food Ordering App Logo"
-        />
-      </div>
-      <div className="nav-items">
-        <ul>
-          <li>Home</li>
-          <li>About Us</li>
-          <li>Contact Us</li>
-          <li>Cart</li>
-        </ul>
-      </div>
-    </div>
-  );
-};
+import Header from "./components/Header";
+import Body from "./components/Body";
 
-const RestaurantCard = (props) => {
-  const { resData } = props;
-  const { cloudinaryImageId, name, cuisines, avgRating, sla } = resData?.info;
-  // console.log(resData.info.sla.deliveryTime);
-  return (
-    <div className="res-card">
-      <img
-        className="res-logo"
-        src={
-          "https://media-assets.swiggy.com/swiggy/image/upload/" +
-          cloudinaryImageId
-        }
-        alt="DOSA PIC"
-      ></img>
-      <h3>{name}</h3>
-      <h4>{cuisines.join(", ")} </h4>
-      <h4>{avgRating}</h4>
-      <h4>Rs. 400 for two</h4>
-      <h4>{sla.deliveryTime} minutes</h4>
-    </div>
-  );
-};
 const resLists = [
   {
     info: {
@@ -641,32 +585,7 @@ const resLists = [
     },
   },
 ];
-const Body = () => {
-  return (
-    <div className="body">
-      <div className="search">
-        Search
-        {/* <img></img> */}
-      </div>
-      <div className="res-container">
-        {/* {/* <RestaurantCard resData={resLists[0]} /> */}
-        {/* <RestaurantCard resName="KFC" cuisine="Biryani, Mutton, Chicken" /> */}
-        {/* <RestaurantCard resData={resLists[1]} />
-        <RestaurantCard resData={resLists[2]} />
-        <RestaurantCard resData={resLists[3]} />
-        <RestaurantCard resData={resLists[4]} />
-        <RestaurantCard resData={resLists[5]} />
-        <RestaurantCard resData={resLists[6]} />  OR USE MAP FUNCTION*/}
 
-        {/* Always use key in map function. Not using keys (not acceptabel <<< index as key <<< unique key id (best practice)*/}
-
-        {resLists.map((restaurant) => (
-          <RestaurantCard key={restaurant.info.id} resData={restaurant} />
-        ))}
-      </div>
-    </div>
-  );
-};
 const AppLayout = () => {
   return (
     <div className="app">
