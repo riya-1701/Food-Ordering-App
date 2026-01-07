@@ -1,0 +1,30 @@
+{
+  "name": "swiggy",
+  "version": "1.0.0",
+  "description": "Food Ordering App",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/riya-1701/Food-Ordering-App.git"
+  },
+  "author": "Riya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/riya-1701/Food-Ordering-App/issues"
+  },
+  "homepage": "https://github.com/riya-1701/Food-Ordering-App#readme",
+  "devDependencies": {
+    "parcel": "^2.16.3"
+  },
+  "dependencies": {
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3"
+  },
+  "browserslist": [
+    "last 2 versions"
+  ]
+}
