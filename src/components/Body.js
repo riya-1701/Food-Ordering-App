@@ -1,11 +1,30 @@
 import RestaurantCard from "./RestaurantCard";
-import resLists from "../../utils/mockData";
-import { useState } from "react";
-import resLists from "../../utils/mockData";
+import { useState, useEffect } from "react";
+// import resLists from "../../utils/mockData";
 
 const Body = () => {
   //Local State Variable - Super Power Variable(For tht Use HOOKS known as UseState) - to chaange state in UI as data changes
-  const [ListOfRestaurants, setListOfRestaurants] = useState(resLists);
+  const [ListOfRestaurants, setListOfRestaurants] = useState([]);
+
+//useEffect calls the callback function after rendering the component
+useEffect(()=>{
+  fetchData();
+}, []);
+
+const fetchData = async () => {
+const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=26.7458774&lng=83.3846564&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
+const json = await data.json();
+console.log(json);
+
+// Optional Chaining
+setListOfRestaurants(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants || []);
+// ListOfRestaurants(json?.data?.cards?.[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+};
+if(ListOfRestaurants.length === 0){
+  return <h1>Loading.....</h1>
+}
+
+// restaurants[0].info
 
   return (
     <div className="body">
@@ -37,7 +56,7 @@ const Body = () => {
 
         {ListOfRestaurants.map((restaurant) => (
           <RestaurantCard key={restaurant.info.id} resData={restaurant} />
-        ))}
+         ))}
       </div>
     </div>
   );
