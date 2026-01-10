@@ -59,3 +59,15 @@ h3{
 h4{
     color: grey;
 }
+/* Shimmer UI */
+.shimmer-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+.shimmer-card{
+    background-color: #f0f0f0;
+    width: 250px;
+    margin: 10px;
+    padding: 16px;
+    height: 360px; 
+}

@@ -1,6 +1,6 @@
 import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
-// import resLists from "../../utils/mockData";
+import Shimmer from "./Shimmer";
 
 const Body = () => {
   //Local State Variable - Super Power Variable(For tht Use HOOKS known as UseState) - to chaange state in UI as data changes
@@ -24,7 +24,7 @@ setListOfRestaurants(json?.data?.cards?.[4]?.card?.card?.gridElements?.infoWithS
 
 //Shimmer UI
 if(ListOfRestaurants.length === 0){
-  return <h1>Loading....</h1>
+  return <Shimmer />
 }
 
   return (
