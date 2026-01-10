@@ -15,16 +15,17 @@ const fetchData = async () => {
 const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=26.7458774&lng=83.3846564&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
 const json = await data.json();
 console.log(json);
+console.log(json?.data?.cards?.[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
 
 // Optional Chaining
-setListOfRestaurants(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants || []);
+setListOfRestaurants(json?.data?.cards?.[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants || []);
 // ListOfRestaurants(json?.data?.cards?.[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
 };
-if(ListOfRestaurants.length === 0){
-  return <h1>Loading.....</h1>
-}
 
-// restaurants[0].info
+//Shimmer UI
+if(ListOfRestaurants.length === 0){
+  return <h1>Loading....</h1>
+}
 
   return (
     <div className="body">
