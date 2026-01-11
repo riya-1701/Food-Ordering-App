@@ -6,6 +6,7 @@ const Body = () => {
   //Local State Variable - Super Power Variable(For tht Use HOOKS known as UseState) - to chaange state in UI as data changes
   const [ListOfRestaurants, setListOfRestaurants] = useState([]);
 
+  const [searchText, setSearchText] = useState("");
 //useEffect calls the callback function after rendering the component
 useEffect(()=>{
   fetchData();
@@ -14,7 +15,7 @@ useEffect(()=>{
 const fetchData = async () => {
 const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=26.7458774&lng=83.3846564&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
 const json = await data.json();
-console.log(json);
+// console.log(json);
 console.log(json?.data?.cards?.[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
 
 // Optional Chaining
@@ -22,7 +23,7 @@ setListOfRestaurants(json?.data?.cards?.[4]?.card?.card?.gridElements?.infoWithS
 // ListOfRestaurants(json?.data?.cards?.[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
 };
 
-//Shimmer UI
+//Conditional Rendering: Shimmer UI
 if(ListOfRestaurants.length === 0){
   return <Shimmer />
 }
@@ -30,6 +31,21 @@ if(ListOfRestaurants.length === 0){
   return (
     <div className="body">
       <div className="filter">
+        <input type= "text" className="search-box" value={searchText} onChange={(e)=>{
+          setSearchText(e.target.value);
+        }}/>
+        <button className="search-btn" 
+        onClick={()=>{
+          //Filter the restraunt cards and update the UI
+          console.log(searchText);
+
+          const filteredRestaurant = ListOfRestaurants.filter(
+            (res)=>res.info.name.toLowerCase().includes(searchText.toLowerCase())
+          );
+          setListOfRestaurants(filteredRestaurant);
+          console.log(filteredRestaurant);
+
+        }}>Search</button>
         <button
           className="filter-btn"
           onClick={() => {
