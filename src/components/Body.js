@@ -5,9 +5,11 @@ import Shimmer from "./Shimmer";
 const Body = () => {
   //Local State Variable - Super Power Variable(For tht Use HOOKS known as UseState) - to chaange state in UI as data changes
   const [ListOfRestaurants, setListOfRestaurants] = useState([]);
-
   const [searchText, setSearchText] = useState("");
-//useEffect calls the callback function after rendering the component
+  const [filteredRestaurant, setFilteredRestaurant] = useState([]);
+
+
+  //useEffect calls the callback function after rendering the component
 useEffect(()=>{
   fetchData();
 }, []);
@@ -20,7 +22,7 @@ console.log(json?.data?.cards?.[4]?.card?.card?.gridElements?.infoWithStyle?.res
 
 // Optional Chaining
 setListOfRestaurants(json?.data?.cards?.[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants || []);
-// ListOfRestaurants(json?.data?.cards?.[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+setFilteredRestaurant(json?.data?.cards?.[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
 };
 
 //Conditional Rendering: Shimmer UI
@@ -42,7 +44,7 @@ if(ListOfRestaurants.length === 0){
           const filteredRestaurant = ListOfRestaurants.filter(
             (res)=>res.info.name.toLowerCase().includes(searchText.toLowerCase())
           );
-          setListOfRestaurants(filteredRestaurant);
+          setFilteredRestaurant(filteredRestaurant);
           console.log(filteredRestaurant);
 
         }}>Search</button>
@@ -53,7 +55,7 @@ if(ListOfRestaurants.length === 0){
             const filteredLists = ListOfRestaurants.filter(
               (res) => res.info.avgRating > 4
             );
-            setListOfRestaurants(filteredLists);
+            setFilteredRestaurant(filteredLists);  
           }}
           //  FOR HOVERING: onMouseOver={() => {
           //     console.log("button Clicked");
@@ -71,7 +73,7 @@ if(ListOfRestaurants.length === 0){
 
         {/* Always use key in map function. Not using keys (not acceptabel <<< index as key <<< unique key id (best practice)*/}
 
-        {ListOfRestaurants.map((restaurant) => (
+        {filteredRestaurant.map((restaurant) => (
           <RestaurantCard key={restaurant.info.id} resData={restaurant} />
          ))}
       </div>
