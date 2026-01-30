@@ -19,6 +19,17 @@
     padding-top:20px;
     margin: 20px;
 } 
+.nav-items ul li a{
+list-style: none;
+        font-size: 24px;
+        font-weight: bold;
+        
+}
+.nav-items ul li a:hover{
+
+            background-color: orangered;
+        
+}
 .nav-items ul li{
         margin: 10px;
         padding: 10px;

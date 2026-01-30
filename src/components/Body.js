@@ -1,13 +1,14 @@
 import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router";
+import useOnlineStatus from "../../utils/useOnlineStatus";
 
 const Body = () => {
   //Local State Variable - Super Power Variable(For tht Use HOOKS known as UseState) - to chaange state in UI as data changes
   const [ListOfRestaurants, setListOfRestaurants] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [filteredRestaurant, setFilteredRestaurant] = useState([]);
-
 
   //useEffect calls the callback function after rendering the component
 useEffect(()=>{
@@ -25,7 +26,17 @@ setListOfRestaurants(json?.data?.cards?.[4]?.card?.card?.gridElements?.infoWithS
 setFilteredRestaurant(json?.data?.cards?.[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
 };
 
-//Conditional Rendering: Shimmer UI
+const onlineStatus = useOnlineStatus();
+console.log(onlineStatus);
+if(onlineStatus === false)
+  return(
+    <h1>
+      Looks like you're offline!! Please check your internet connection!
+    </h1>
+  );
+
+
+// Conditional Rendering: Shimmer UI
 if(ListOfRestaurants.length === 0){
   return <Shimmer />
 }
@@ -74,7 +85,7 @@ if(ListOfRestaurants.length === 0){
         {/* Always use key in map function. Not using keys (not acceptabel <<< index as key <<< unique key id (best practice)*/}
 
         {filteredRestaurant.map((restaurant) => (
-          <RestaurantCard key={restaurant.info.id} resData={restaurant} />
+          <Link key={restaurant.info.id} to={"/restaurants/"+ restaurant.info.id}><RestaurantCard resData={restaurant} /></Link>
          ))}
       </div>
     </div>
