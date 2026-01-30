@@ -43,11 +43,11 @@ if(ListOfRestaurants.length === 0){
 
   return (
     <div className="body">
-      <div className="filter">
-        <input type= "text" className="search-box" value={searchText} onChange={(e)=>{
+      <div className="filter m-4">
+        <input type= "text" className="search-box border-2" value={searchText} onChange={(e)=>{
           setSearchText(e.target.value);
         }}/>
-        <button className="search-btn" 
+        <button className="search-btn px-4 py-0.5 border-2 bg-blue-600 text-white cursor-pointer rounded-lg" 
         onClick={()=>{
           //Filter the restraunt cards and update the UI
           console.log(searchText);
@@ -60,7 +60,7 @@ if(ListOfRestaurants.length === 0){
 
         }}>Search</button>
         <button
-          className="filter-btn"
+          className="filter-btn px-4 py-0.5 my-6 mx-12 border-2 bg-blue-600 text-white cursor-pointer radius rounded-lg"
           onClick={() => {
             //Filter Logic
             const filteredLists = ListOfRestaurants.filter(
@@ -75,7 +75,7 @@ if(ListOfRestaurants.length === 0){
           Top Rated Restaurant
         </button>
       </div>
-      <div className="res-container">
+      <div className="res-container flex flex-wrap">
         {/* {/* <RestaurantCard resData={resLists[0]} /> */}
         {/* <RestaurantCard resName="KFC" cuisine="Biryani, Mutton, Chicken" /> */}
         {/* <RestaurantCard resData={resLists[1]} />

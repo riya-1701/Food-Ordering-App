@@ -10,7 +10,7 @@ import { createBrowserRouter, Outlet, RouterProvider } from "react-router";
 // import Grocery from "./components/Grocery";
 
 //Lazy Loading of Grocery 
-const Grocery = lazy(() => import("./components/Grocery"));
+const Grocery = lazy(() => import('./components/Grocery'));
 
 const AppLayout = () => { 
   return (
